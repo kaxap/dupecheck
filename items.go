@@ -3,31 +3,31 @@ package dupecheck
 import "reflect"
 
 type IntItem struct {
-	i int
+	V int
 }
 
 func (e *IntItem) Value() interface{} {
-	return e.i
+	return e.V
 }
 
 func (e *IntItem) Equal(item Item) bool {
 	if item == nil || reflect.ValueOf(item).IsNil() {
 		return false
 	}
-	return e.i == item.(*IntItem).i
+	return e.V == item.(*IntItem).V
 }
 
 type StringItem struct {
-	i string
+	V string
 }
 
 func (e *StringItem) Value() interface{} {
-	return e.i
+	return e.V
 }
 
 func (e *StringItem) Equal(item Item) bool {
 	if item == nil || reflect.ValueOf(item).IsNil() {
 		return false
 	}
-	return e.i == item.(*StringItem).i
+	return e.V == item.(*StringItem).V
 }
