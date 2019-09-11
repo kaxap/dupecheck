@@ -2,12 +2,12 @@ package dupcheck
 
 import "reflect"
 
-type MapBackedDupeCheck struct {
+type MapBacked struct {
 	sliceCheck DupeCheck
 	m          map[interface{}]struct{}
 }
 
-func (m *MapBackedDupeCheck) Add(item Item) Item {
+func (m *MapBacked) Add(item Item) Item {
 	old := m.sliceCheck.Add(item)
 	if old != nil {
 		// evict old item
@@ -19,7 +19,7 @@ func (m *MapBackedDupeCheck) Add(item Item) Item {
 	return old
 }
 
-func (m *MapBackedDupeCheck) Delete(item Item) bool {
+func (m *MapBacked) Delete(item Item) bool {
 	if m.sliceCheck.Delete(item) {
 		delete(m.m, item.Value())
 		return true
@@ -27,7 +27,7 @@ func (m *MapBackedDupeCheck) Delete(item Item) bool {
 	return false
 }
 
-func (m *MapBackedDupeCheck) Has(item Item) bool {
+func (m *MapBacked) Has(item Item) bool {
 	if item == nil || reflect.ValueOf(item).IsNil() {
 		return false
 	}
@@ -35,6 +35,6 @@ func (m *MapBackedDupeCheck) Has(item Item) bool {
 	return ok
 }
 
-func NewMapBackedDupeCheck(size int) DupeCheck {
-	return &MapBackedDupeCheck{sliceCheck: NewSliceBackedDupeCheck(size), m: make(map[interface{}]struct{})}
+func NewMapBacked(size int) DupeCheck {
+	return &MapBacked{sliceCheck: NewSliceBacked(size), m: make(map[interface{}]struct{})}
 }

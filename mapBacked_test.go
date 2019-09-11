@@ -6,7 +6,7 @@ import (
 )
 
 func TestMapBackedDupeCheck_Add(t *testing.T) {
-	check := NewMapBackedDupeCheck(10)
+	check := NewMapBacked(10)
 	for i := 0; i < 10; i++ {
 		old := check.Add(&IntItem{i})
 		assert.Nil(t, old)
@@ -20,7 +20,7 @@ func TestMapBackedDupeCheck_Add(t *testing.T) {
 }
 
 func TestMapBackedDupeCheck_Add_NilValue(t *testing.T) {
-	check := NewMapBackedDupeCheck(10)
+	check := NewMapBacked(10)
 	paniced := false
 	defer func() {
 		_ = recover()
@@ -31,7 +31,7 @@ func TestMapBackedDupeCheck_Add_NilValue(t *testing.T) {
 }
 
 func TestMapBackedDupeCheck_Add_NilInterfaceValue(t *testing.T) {
-	check := NewMapBackedDupeCheck(10)
+	check := NewMapBacked(10)
 	paniced := false
 	defer func() {
 		_ = recover()
@@ -44,7 +44,7 @@ func TestMapBackedDupeCheck_Add_NilInterfaceValue(t *testing.T) {
 }
 
 func TestMapBackedDupeCheck_Delete_NilValue(t *testing.T) {
-	check := NewMapBackedDupeCheck(10)
+	check := NewMapBacked(10)
 	paniced := false
 	defer func() {
 		_ = recover()
@@ -55,7 +55,7 @@ func TestMapBackedDupeCheck_Delete_NilValue(t *testing.T) {
 }
 
 func TestMapBackedDupeCheck_Delete_NilInterfaceValue(t *testing.T) {
-	check := NewMapBackedDupeCheck(10)
+	check := NewMapBacked(10)
 	paniced := false
 	defer func() {
 		_ = recover()
@@ -68,19 +68,19 @@ func TestMapBackedDupeCheck_Delete_NilInterfaceValue(t *testing.T) {
 }
 
 func TestMapBackedDupeCheck_Has_NilValue(t *testing.T) {
-	check := NewMapBackedDupeCheck(10)
+	check := NewMapBacked(10)
 	assert.False(t, check.Has(nil))
 }
 
 func TestMapBackedDupeCheck_Has_NilInterfaceValue(t *testing.T) {
-	check := NewMapBackedDupeCheck(10)
+	check := NewMapBacked(10)
 	var item *IntItem = nil
 	var item2 Item = item
 	assert.False(t, check.Has(item2))
 }
 
 func TestMapBackedDupeCheck_Delete(t *testing.T) {
-	check := NewMapBackedDupeCheck(10)
+	check := NewMapBacked(10)
 	for i := 0; i < 10; i++ {
 		_ = check.Add(&IntItem{i})
 	}
@@ -92,7 +92,7 @@ func TestMapBackedDupeCheck_Delete(t *testing.T) {
 		assert.True(t, check.Has(&IntItem{i}))
 	}
 
-	check = NewMapBackedDupeCheck(10)
+	check = NewMapBacked(10)
 	for i := 0; i < 5; i++ {
 		_ = check.Add(&IntItem{i})
 	}
@@ -103,14 +103,14 @@ func TestMapBackedDupeCheck_Delete(t *testing.T) {
 }
 
 func TestMapBackedDupeCheck_Has(t *testing.T) {
-	check := NewMapBackedDupeCheck(10)
+	check := NewMapBacked(10)
 	for i := 0; i < 10; i++ {
 		_ = check.Add(&IntItem{i})
 	}
 	assert.True(t, check.Has(&IntItem{0}))
 	assert.False(t, check.Has(&IntItem{10}))
 
-	check = NewMapBackedDupeCheck(10)
+	check = NewMapBacked(10)
 	for i := 0; i < 5; i++ {
 		_ = check.Add(&IntItem{i})
 	}

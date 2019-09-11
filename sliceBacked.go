@@ -2,15 +2,15 @@ package dupcheck
 
 import "reflect"
 
-type SliceBackedDupeCheck struct {
+type SliceBacked struct {
 	Ring         []Item
 	currentIndex int
 	overflowFlag bool
 }
 
-func (s *SliceBackedDupeCheck) Add(item Item) Item {
+func (s *SliceBacked) Add(item Item) Item {
 	if item == nil || reflect.ValueOf(item).IsNil() {
-		panic("Cannot add nil value to SliceBackedDupeCheck")
+		panic("Cannot add nil value to SliceBacked")
 	}
 
 	i := s.find(item)
@@ -32,9 +32,9 @@ func (s *SliceBackedDupeCheck) Add(item Item) Item {
 	return old
 }
 
-func (s *SliceBackedDupeCheck) Delete(item Item) bool {
+func (s *SliceBacked) Delete(item Item) bool {
 	if item == nil || reflect.ValueOf(item).IsNil() {
-		panic("Cannot delete nil value from SliceBackedDupeCheck")
+		panic("Cannot delete nil value from SliceBacked")
 	}
 
 	i := s.find(item)
@@ -47,7 +47,7 @@ func (s *SliceBackedDupeCheck) Delete(item Item) bool {
 	return true
 }
 
-func (s *SliceBackedDupeCheck) find(item Item) int {
+func (s *SliceBacked) find(item Item) int {
 	if item == nil || reflect.ValueOf(item).IsNil() {
 		return -1
 	}
@@ -69,10 +69,10 @@ func (s *SliceBackedDupeCheck) find(item Item) int {
 	}
 }
 
-func (s *SliceBackedDupeCheck) Has(item Item) bool {
+func (s *SliceBacked) Has(item Item) bool {
 	return s.find(item) >= 0
 }
 
-func NewSliceBackedDupeCheck(size int) DupeCheck {
-	return &SliceBackedDupeCheck{Ring: make([]Item, size, size), currentIndex: 0, overflowFlag: false}
+func NewSliceBacked(size int) DupeCheck {
+	return &SliceBacked{Ring: make([]Item, size, size), currentIndex: 0, overflowFlag: false}
 }
