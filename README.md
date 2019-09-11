@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/kaxap/dupecheck.svg?branch=master)](https://travis-ci.org/kaxap/dupecheck)
+[![Coverage Status](https://coveralls.io/repos/github/kaxap/dupecheck/badge.svg?branch=master)](https://coveralls.io/github/kaxap/dupecheck?branch=master)
+
 # Description
 
 A very simple library for checking some data for duplicates which is useful for a long-running applications checking for duplicates against values with potentially high cardinality.
