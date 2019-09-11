@@ -1,6 +1,6 @@
 package dupcheck
 
-func NewDupeCheck(size int) DupeCheck {
+func New(size int) DupeCheck {
 	if size <= 100 {
 		return NewSliceBackedDupeCheck(size)
 	}
