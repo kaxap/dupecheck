@@ -1,4 +1,4 @@
-package dupcheck
+package dupecheck
 
 type DupeCheck interface {
 	Add(item Item) Item

@@ -1,4 +1,4 @@
-package dupcheck
+package dupecheck
 
 import (
 	"testing"

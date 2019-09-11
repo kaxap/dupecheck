@@ -1,4 +1,4 @@
-package dupcheck
+package dupecheck
 
 func New(size int) DupeCheck {
 	if size <= 100 {
